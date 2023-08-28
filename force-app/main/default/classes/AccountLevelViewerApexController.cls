@@ -14,12 +14,8 @@ public with sharing class AccountLevelViewerApexController {
     @AuraEnabled
     public static void updateLevel(List<Id> cuentasIds){
     try {
-        System.debug('updateLevel llamado con los siguientes IDs: ' + cuentasIds);
 
         List<Account> accountsToUpdate = [SELECT Id, Nivel__c FROM Account WHERE Id IN :cuentasIds];
-        
-        System.debug('Cuentas recuperadas para actualización: ' + accountsToUpdate);
-
         for(Account cuenta: accountsToUpdate) {
             if(cuenta.Nivel__c == 'Nivel 1') {
                 cuenta.Nivel__c = 'Nivel 2';
@@ -27,15 +23,11 @@ public with sharing class AccountLevelViewerApexController {
             } else if(cuenta.Nivel__c == 'Nivel 2') {
                 cuenta.Nivel__c = 'Nivel 1';
             }
+            cuenta.StateSelected__c = false;
         }
-
-        // Debug para mostrar las cuentas con los nuevos niveles antes de actualizar
-        System.debug('Cuentas con niveles modificados (antes de la actualización): ' + accountsToUpdate);
-
         update accountsToUpdate;
        
     } catch (Exception e) {
-        System.debug('Error capturado durante la actualización de niveles: ' + e.getMessage());
         throw new AuraHandledException('Hubo un error al actualizar el nivel de las cuentas:' + e.getMessage());
     }
 }
