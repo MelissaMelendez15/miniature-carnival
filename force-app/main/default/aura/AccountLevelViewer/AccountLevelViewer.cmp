@@ -1,0 +1,64 @@
+<aura:component controller="AccountLevelViewerApexController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome" access="global" >
+   <!-- Se llama al componente a doInit cuando el componente se cargue-->
+   <aura:handler name="init"  value="{!this}" action="{!c.doInit}"/>
+   
+   <aura:attribute name="cuentasNivel1" type="Account[]" />
+   <aura:attribute name="cuentasNivel2" type="Account[]" />
+   <ltng:require styles="https://fonts.googleapis.com/css?family=Roboto" />
+
+   <!-- Tabla para cuentas de Nivel 1-->
+  <div class="slds-m-top_medium slds-m-bottom_medium">
+    <lightning:button label="Actualizar nivel de cuenta" onclick="{!c.updateAccountLevel}" class="customButton slds-m-bottom_medium"/>
+      <table class="customMaxTableWidth slds-table slds-table_bordered slds-table_cell-buffer slds-table_striped">
+        <thead>
+           <tr>
+              <th class="slds-text-title_caps">Nombre de la cuenta</th>
+              <th class="slds-text-title_caps">Teléfono</th>
+              <th class="slds-text-title_caps">Modificado por</th>
+              <th class="slds-text-title_caps slds-text-align_center">Casilla de verificación</th>
+           </tr>
+        </thead>
+        <tbody>
+           <!--Registros de cuentas de Nivel 1-->
+          <aura:iteration items="{!v.cuentasNivel1}" var="cuenta">
+            <tr>
+              <td>{!cuenta.Name}</td>
+              <td>{!cuenta.Phone}</td>
+              <td>{!cuenta.LastModifiedBy.Name}</td>
+              <td class="slds-text-align_center">
+                <lightning:input type="checkbox" value="{!cuenta.Id}" checked="{!cuenta.StateSelected__c}" onchange="{!c.updateSelection}"/>
+              </td>
+           </tr>
+          </aura:iteration>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Tabla para cuentas de Nivel 2-->
+    <div class="slds-m-top_large">
+      <table class="customMaxTableWidth slds-table slds-table_bordered slds-table_cell-buffer slds-table_striped">
+        <thead>
+           <tr>
+              <th class="slds-text-title_caps">Nombre de la cuenta</th>
+              <th class="slds-text-title_caps">Teléfono</th>
+              <th class="slds-text-title_caps">Modificado por</th>
+              <th class="slds-text-title_caps slds-text-align_center">Casilla de verificación</th>
+           </tr>
+        </thead>
+        <tbody>
+           <!--Registros de cuentas de Nivel 2-->
+           <aura:iteration items="{!v.cuentasNivel2}" var="cuenta">
+            <tr>
+              <td>{!cuenta.Name}</td>
+              <td>{!cuenta.Phone}</td>
+              <td>{!cuenta.LastModifiedBy.Name}</td>
+              <td class="slds-text-align_center">
+                <lightning:input type="checkbox" value="{!cuenta.Id}" checked="{!cuenta.StateSelected__c}" onchange="{!c.updateSelection}"/>
+              </td>
+           </tr>
+          </aura:iteration>
+        </tbody>
+      </table>
+    </div>
+    
+</aura:component>	

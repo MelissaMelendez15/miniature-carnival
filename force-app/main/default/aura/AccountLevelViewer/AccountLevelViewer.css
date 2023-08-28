@@ -1,0 +1,27 @@
+.THIS {
+   font-family: 'Roboto', sans-serif;
+}
+
+.THIS .customMaxTableWidth {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.THIS .customButton {
+    padding: 10px 15px;
+    font-size: 1.5em;
+    display: block;
+    margin-left: 515px;
+    margin-bottom: 15px;
+}
+
+.THIS lightning-input[type="checkbox"] {
+ transform: scale(1.5);
+}
+
+@media (max-width: 768px) {
+    .THIS .customMaxTableWidth {
+        max-width: 100%;
+    }
+}
